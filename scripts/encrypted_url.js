@@ -2,12 +2,9 @@
 
 function getUrlVars() {
     var vars = {};
-    var parts = window.location.href.replace(
-        /[?&]+([^=&]+)=([^&]*)/gi,
-        function (m, key, value) {
-            vars[key] = value;
-        }
-    );
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
     return vars;
 }
 
@@ -26,11 +23,8 @@ function keyPress(event) {
     if (event.keyCode == 13) {
         let passwordInput = document.getElementById("key");
         try {
-            let decryptedUrl = CryptoJS.AES.decrypt(
-                getUrlVars().url,
-                passwordInput.value
-            ).toString(CryptoJS.enc.Utf8);
-            if (decryptedUrl) {
+            let decryptedUrl = CryptoJS.AES.decrypt(getUrlVars().url, passwordInput.value).toString(CryptoJS.enc.Utf8);
+            if (CryptoJS.SHA256(decryptedUrl + getUrlVars().url) == getUrlVars().hash) {
                 window.location.href = decryptedUrl;
             } else {
                 invaild(passwordInput);
