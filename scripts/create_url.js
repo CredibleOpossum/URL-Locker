@@ -11,7 +11,7 @@ function submit() {
     }
     url = `https://${
         window.location.hostname
-    }/index.html?url=${CryptoJS.AES.encrypt(url.value, key.value)}`;
+    }/URL-Locker/index.html?url=${CryptoJS.AES.encrypt(url.value, key.value)}`;
     document.getElementById(
         "urlField"
     ).innerHTML += `<br></br><a href=\"${url}\">${url}</a>`;
