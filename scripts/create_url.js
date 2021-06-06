@@ -1,3 +1,5 @@
+"use strict";
+
 function submit() {
     let url = document.getElementById("url");
     let key = document.getElementById("key");
