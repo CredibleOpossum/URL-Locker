@@ -9,12 +9,9 @@ function submit() {
         invaild(key);
         return;
     }
-    url = `https://${
-        window.location.hostname
-    }/URL-Locker/index.html?url=${CryptoJS.AES.encrypt(url.value, key.value)}`;
-    document.getElementById(
-        "urlField"
-    ).innerHTML += `<br></br><a href=\"${url}\">${url}</a>`;
+    let encrypted = CryptoJS.AES.encrypt(url.value, key.value);
+    let newUrl = `https://${window.location.hostname}/URL-Locker/index.html?url=${encrypted}&hash=${CryptoJS.SHA256(url.value + encrypted)}`;
+    document.getElementById("urlField").innerHTML += `<br></br><a href=\"${newUrl}\">${newUrl}</a>`;
 }
 
 function invaild(element) {
